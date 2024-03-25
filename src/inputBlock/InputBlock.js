@@ -5,8 +5,8 @@ import '../App.css'
 export default function InputBlock() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
-    let userRole = '';
-    let userAuth = '';
+    const [userRole, setUserRole] = useState('');
+    const [userAuth, setUserAuth] = useState('');
     const userInfo = {
         login: userName,
         pass: userPassword,
@@ -17,20 +17,20 @@ export default function InputBlock() {
     function showUserInfo() {
         if (userName === 'andrey@vtb.ru') {
             if (userPassword === 'adminPassword') {
-                userAuth = 'true';
-                userRole = 'admin'
+                setUserRole('admin');
+                setUserAuth('true')
             } else {
-                userRole = 'false';
-                userAuth = 'false'
+                setUserRole('');
+                setUserAuth('false')
             }
         } else {
             if (userName === 'sasha@vtb.ru') {
                 if (userPassword === 'userPassword') {
-                    userAuth = 'true';
-                    userRole = 'default user'
+                    setUserAuth('true');
+                    setUserRole('default user')
                 } else {
-                    userRole = 'false';
-                    userAuth = 'false'
+                    setUserRole('');
+                    setUserAuth('false')
                 }
             }
         }
