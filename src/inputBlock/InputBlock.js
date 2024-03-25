@@ -5,19 +5,37 @@ import '../App.css'
 export default function InputBlock() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    let userRole = '';
+    let userAuth = '';
     const userInfo = {
         login: userName,
         pass: userPassword,
-        role: 'роль...',
-        auth: 'да?'
+        role: userRole,
+        auth: userAuth
     }
-
-
 
     function showUserInfo() {
+        if (userName === 'andrey@vtb.ru') {
+            if (userPassword === 'adminPassword') {
+                userAuth = 'true';
+                userRole = 'admin'
+            } else {
+                userRole = 'false';
+                userAuth = 'false'
+            }
+        } else {
+            if (userName === 'sasha@vtb.ru') {
+                if (userPassword === 'userPassword') {
+                    userAuth = 'true';
+                    userRole = 'default user'
+                } else {
+                    userRole = 'false';
+                    userAuth = 'false'
+                }
+            }
+        }
         console.log(JSON.stringify(userInfo, null, 2))
     }
-
 
     return (
         <div className='inputBlock'>
@@ -31,19 +49,6 @@ export default function InputBlock() {
     )
 
 
-    function authWithEmailAndPassword(email, password) {
-        const apiKey = 'AIzaSyCTxHgxfwwLIk_c9cYtIltmhG0T8oZU5YU'
-        return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                email, password,
-                returnSecureToken: true
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => data.idToken)
-    }
+
 }
+
