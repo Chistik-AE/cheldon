@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import '../App.css'
+import './logIn.css'
 
 
-export default function InputBlock() {
+export default function LogIn() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userRole, setUserRole] = useState('');
@@ -33,7 +33,7 @@ export default function InputBlock() {
 
 
     return (
-        <div className='inputBlock'>
+        <div className='logIn'>
             Авторизация
             <input type='email' placeholder='User Name' id='email' value={userName} onChange={(event) => setUserName(event.target.value)} required />
             <input type='password' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
@@ -45,8 +45,6 @@ export default function InputBlock() {
             </button>
         </div>
     )
-
-
 
 }
 

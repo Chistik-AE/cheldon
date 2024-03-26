@@ -1,0 +1,56 @@
+[
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_offer_matrix",
+        "max_finish_dttm": "2023-06-18 13:57:22+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "RDV"
+    },
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_pti",
+        "max_finish_dttm": "2023-06-21 05:15:26+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "RDV"
+    },
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_pti",
+        "max_finish_dttm": "2023-06-21 05:15:26+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "IDL"
+    },
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_decision_result",
+        "max_finish_dttm": "2023-06-21 05:15:08+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "RDV"
+    },
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_decision_result",
+        "max_finish_dttm": "2023-06-21 05:15:08+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "IDL"
+    },
+    {
+        "rdv_src_cd": "RKK",
+        "bdm_name": "bdm.application",
+        "run_params": "wf_mart_offer_matrix",
+        "max_finish_dttm": "2023-06-18 13:57:22+00:00",
+        "count_records": 10,
+        "run_last_state": "success",
+        "type_flow": "IDL"
+    }
+]

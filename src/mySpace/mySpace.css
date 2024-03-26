@@ -1,0 +1,25 @@
+.mySpace {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+
+    .logOut {
+        margin-top: 40px;
+    } 
+
+    .myTable {
+        border: 2px solid black;
+    }
+
+    .cell {
+        border: 2px solid black;   
+    }
+
+    .buttomOut {
+        display: flex;
+        flex-wrap: wrap;
+    }
