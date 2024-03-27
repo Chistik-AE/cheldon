@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import './logIn.css'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LogIn() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    let navigate = useNavigate();
 
     const [user, setUser] = useState({
         role: '',
         isAuth: false
     })
 
-    const userInfo = {
+
+    /* const userInfo = {
         login: userName,
         pass: userPassword,
         role: user.role,
         auth: user.isAuth
-    }
+    } */
+
+
 
     function checkUser(prev, props) {
         let newState = { ...prev, role: '', isAuth: false };
@@ -31,8 +36,7 @@ export default function LogIn() {
     }
 
     const SuccessBlock = () => {
-        let descr = JSON.stringify(userInfo, null, 2)
-        return (<div style={{ marginTop: '200px' }} > log is success <br/> {descr}</div>)
+        return navigate("/main");
     }
 
 
@@ -56,5 +60,6 @@ export default function LogIn() {
     </div>
     )
 
-}
 
+
+}

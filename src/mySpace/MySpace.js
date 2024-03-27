@@ -2,23 +2,24 @@ import React, { useState } from 'react'
 import './mySpace.css'
 import data from './dataBase.json'
 import { keyboard } from '@testing-library/user-event/dist/keyboard';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function MySpace() {
-
+    let navigate = useNavigate();
     let tableHead = Object.keys(data[0]);
     let tableRows = Object.values(data);
 
-    return (
-        <div className='mySpace' >
+
+    return ( //пока нет изменения/проверки роли и авторизации, нужно понять как вытягивать значение isAuth из Login.js и "экспортировать"
+        <div className='mySpace' >  
             <div className='buttomOut'>
-                <button className='logOut'  >
-                    Выйти
-                </button>
-            </div>
-            <div >
-                <div >
+                <button className='logOut' onClick={() => { navigate("/logIn") }} >    
+                    Выйти 
+                </button>  
+            </div> 
+            <div > 
+                <div > 
                     <h1>
                         Таблица на моей странице
                     </h1>
