@@ -7,18 +7,10 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 export default function MySpace() {
 
-
     let tableHead = Object.keys(data[0]);
-    let tableBody = Object.values(data);
-    /* console.log(Object.keys(data[0]).length); */
-
-
+    let tableRows = Object.values(data);
 
     return (
-
-
-
-
         <div className='mySpace' >
             <div className='buttomOut'>
                 <button className='logOut'  >
@@ -31,36 +23,22 @@ export default function MySpace() {
                         Таблица на моей странице
                     </h1>
                 </div>
-                <div class="myTable">
+                <div>
                     <table class="product">
                         <thead>
-                            {tableHead.map((headerName) => { return <th className='myTable'>{headerName}</th> })}
+                            {tableHead.map((newHead) => { return <th className='cell'>{newHead}</th> })}
                         </thead>
                         <tbody>
-
-                            {tableBody((tableRow) => {
-                                return
-                                for (let row = 0; row < data.length; row++) {
-                                    <tr>
-                                        for (let cell = 0; cell < Object.keys(data[row]).length; cell++) {
-                                            <th>{Object.keys(data[row.cell])}</th>
-                                        }
-                                    </tr>
-                                }
-                            })
-                            }
-
+                            {tableRows.map((newRow) => { return <tr className='cell'> {Object.values(newRow).map((row) => { return <td className='cell'>{row}</td> })}</tr> })}
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div >
     )
 
 
-
-
-
 }
+
+
 
