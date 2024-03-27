@@ -11,12 +11,14 @@
         margin-top: 40px;
     } 
 
-    .myTable {
-        border: 2px solid black;
+    table {
+    display: table;
+    border-collapse: collapse;
     }
-
-    .cell {
-        border: 1px solid black;   
+    
+    th, td {
+        border: 1px solid black;  
+        border-collapse: collapse;        
     }
 
     .buttomOut {

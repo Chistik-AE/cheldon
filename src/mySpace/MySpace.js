@@ -24,12 +24,12 @@ export default function MySpace() {
                     </h1>
                 </div>
                 <div>
-                    <table class="product">
+                    <table>
                         <thead>
-                            {tableHead.map((newHead) => { return <th className='cell'>{newHead}</th> })}
+                            {tableHead.map((newHead) => { return <th>{newHead}</th> })}
                         </thead>
                         <tbody>
-                            {tableRows.map((newRow) => { return <tr className='cell'> {Object.values(newRow).map((row) => { return <td className='cell'>{row}</td> })}</tr> })}
+                            {tableRows.map((newRow) => { return <tr> {Object.values(newRow).map((cell) => { return <td>{cell}</td> })}</tr> })}
                         </tbody>
                     </table>
                 </div>
