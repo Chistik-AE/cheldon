@@ -8,8 +8,8 @@ import data from './mySpace/dataBase.json'
 function App() {
   return (
     <div className="App">
-            <LogIn /> 
-      {/* <MySpace /> */}
+      {/* <LogIn /> */}
+      <MySpace />
     </div>
   );
 }

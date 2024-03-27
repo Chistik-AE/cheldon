@@ -1,48 +1,17 @@
 import React, { useState } from 'react'
 import './mySpace.css'
 import data from './dataBase.json'
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 
 
 export default function MySpace() {
 
 
+    let tableHead = Object.keys(data[0]);
+    let tableBody = Object.values(data);
+    /* console.log(Object.keys(data[0]).length); */
 
-
-    const newData = data.map(Object.values);
-
-
-
-    /* let res = newData.map(function (item) {
-        return 
-        
-        <tr key={item.id}>
-            <td className='call'>{item.rdv_src_cd}</td>
-            <td className='call'>{item.bdm_name}</td>
-            <td className='call'>{item.run_params}</td>
-            <td className='call'>{item.max_finish_dttm}</td>
-            <td className='call'>{item.count_records}</td>
-            <td className='call'>{item.run_last_state}</td>
-            <td className='call'>{item.type_flow}</td>
-        </tr>;
-    });
-
-    return <table>
-        <thead>
-            <tr>
-                <td>Название</td>
-                <td>Стоимость</td>
-                <td>Стоимость</td>
-                <td>Стоимость</td>
-                <td>Стоимость</td>
-                <td>Стоимость</td>
-                <td>Стоимость</td>
-            </tr>
-        </thead>
-        <tbody>
-            {res}
-        </tbody>
-    </table>; */
 
 
     return (
@@ -62,35 +31,27 @@ export default function MySpace() {
                         Таблица на моей странице
                     </h1>
                 </div>
-                <div>
-                    {/*  <table className='myTable'>
-                        <thead className='call'>
-                            <td className='call'>rdv_src_cd</td>
-                            <td className='call'>bdm_name</td>
-                            <td className='call'>run_params</td>
-                            <td className='call'>max_finish_dttm</td>
-                            <td className='call'>count_records</td>
-                            <td className='call'>run_last_state</td>
-                            <td className='call'>type_flow</td>
+                <div class="myTable">
+                    <table class="product">
+                        <thead>
+                            {tableHead.map((headerName) => { return <th className='myTable'>{headerName}</th> })}
                         </thead>
                         <tbody>
-                            <% for (let index = 0; index < newData.length; index++) {
-                                const element = array[index];
-                                
-                            }  {
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            }; %>}
+
+                            {tableBody((tableRow) => {
+                                return
+                                for (let row = 0; row < data.length; row++) {
+                                    <tr>
+                                        for (let cell = 0; cell < Object.keys(data[row]).length; cell++) {
+                                            <th>{Object.keys(data[row.cell])}</th>
+                                        }
+                                    </tr>
+                                }
+                            })
+                            }
 
                         </tbody>
-                    </table> */}
+                    </table>
                 </div>
 
             </div>
