@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './mySpace.css'
 import data from './dataBase.json'
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,11 +10,11 @@ export default function MySpace() {
     let tableRows = Object.values(data);
 
     function logOut() {
-        navigate("/logIn");
         localStorage.clear();
+        navigate("/logIn");
     }
 
-    return ( //пока нет изменения/проверки роли и авторизации, нужно понять как вытягивать значение isAuth из Login.js и "экспортировать"
+    return (
         <div className='mySpace' >
             <div className='buttomOut'>
                 {localStorage.getItem('User')}
@@ -32,10 +31,10 @@ export default function MySpace() {
                 <div>
                     <table>
                         <thead>
-                            {tableHead.map((newHead) => { return <th>{newHead}</th> })}
+                            {tableHead.map((newHead, index) => { return <th key={index}>{newHead}</th> })}
                         </thead>
                         <tbody>
-                            {tableRows.map((newRow) => { return <tr> {Object.values(newRow).map((cell) => { return <td>{cell}</td> })}</tr> })}
+                            {tableRows.map((newRow, index) => { return <tr key={index}> {Object.values(newRow).map((cell, index) => { return <td key={index}>{cell}</td> })}</tr> })}
                         </tbody>
                     </table>
                 </div>
