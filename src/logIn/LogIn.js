@@ -18,6 +18,10 @@ export default function LogIn() {
         navigate("/main");
     }
 
+    useEffect(() => {
+        if (localStorage.getItem('isAuth')) navigate('/main')
+    }, [])
+
 
     function checkUser() {
         if (userName === 'andrey@vtb.ru' && userPassword === 'adminPassword') {
@@ -29,19 +33,17 @@ export default function LogIn() {
             }
     }
 
-    return (<div>
-        {
-            <div className='logIn'>
-                Авторизация
-                <input type='email' placeholder='User Name' id='email' value={userName} onChange={(event) => setUserName(event.target.value)} required />
-                <input type='text' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
-                <button className='inputButtom'
-                    onClick={() => { checkUser() }} >
-                    войти
-                </button>
-            </div>
 
-        }
+    return (<div>
+        <div className='logIn'>
+            Авторизация
+            <input type='email' placeholder='User Name' id='email' value={userName} onChange={(event) => setUserName(event.target.value)} required />
+            <input type='text' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
+            <button className='inputButtom'
+                onClick={() => { checkUser() }} >
+                войти
+            </button>
+        </div>
     </div>
     )
 

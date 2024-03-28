@@ -5,6 +5,10 @@ function PrivateRouteMain() {
 
   const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth') ? true : false)
 
+  useEffect(()=>{
+    console.log('useeffect')
+  },[])
+
   return (isAuth ? <Outlet /> : <Navigate to="/login" />)
 }
 

@@ -9,13 +9,15 @@ import PrivateRouteLogIn from './contexts/PrivateRouteLogIn';
 
 function App() {
 
+ 
 
   return (
     <Router>
       <Routes>
         <Route index path={"/login"} element={<LogIn />} />
-        <Route element={<PrivateRouteMain />}>
-          <Route path={"/*"} element={<MySpace />} />
+        <Route element={<PrivateRouteMain  />}>
+          <Route path={"/main"} element={<MySpace />} />
+          <Route path={"/"} element={<MySpace />} />
         </Route>
       </Routes>
     </Router>
