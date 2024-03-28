@@ -8,17 +8,14 @@ import PrivateRouteLogIn from './contexts/PrivateRouteLogIn';
 
 
 function App() {
-  const isAuth = Boolean(localStorage.getItem('isAuth'));
+
 
   return (
     <Router>
       <Routes>
-        <Route element={<PrivateRouteLogIn isAuth={isAuth} />}>
-          <Route path="/logIn" element={<LogIn />} />
-          <Route path="/" element={<LogIn />} />
-        </Route>
-        <Route element={<PrivateRouteMain isAuth={isAuth} />}>
-          <Route path={"/main"} element={<MySpace />} />
+        <Route index path={"/login"} element={<LogIn />} />
+        <Route element={<PrivateRouteMain />}>
+          <Route path={"/*"} element={<MySpace />} />
         </Route>
       </Routes>
     </Router>
