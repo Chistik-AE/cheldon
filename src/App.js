@@ -9,8 +9,7 @@ import PrivateRoute from './PrivateRoute';
 
 
 function App() {
-  const isAuth = false;  //пока ручной блок, нужно понять как вытягивать значение isAuth из Login.js
-
+  const isAuth = Boolean( localStorage.getItem('isAuth') );
 
   return (
     <Router>

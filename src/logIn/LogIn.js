@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './logIn.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -8,19 +8,44 @@ export default function LogIn() {
     const [userPassword, setUserPassword] = useState('');
     let navigate = useNavigate();
 
+
+    useEffect(() => {
+        if (user.isAuth) {
+            localStorage.setItem('role', user.role);
+            localStorage.setItem('isAuth', user.isAuth);
+            localStorage.setItem('User', userName);
+            console.log('useEffect');
+            return navigate("/main");
+        }
+    },)
+
+
+
     const [user, setUser] = useState({
         role: '',
         isAuth: false
     })
 
-
-    /* const userInfo = {
-        login: userName,
-        pass: userPassword,
-        role: user.role,
-        auth: user.isAuth
+    /* function checkLogIn() {
+        setUser(checkUser)
     } */
 
+    /* function saveLocalStorage() {
+        if (user.isAuth) {
+            localStorage.setItem('role', user.role);
+            localStorage.setItem('isAuth', user.isAuth);
+            localStorage.setItem('User', userName);
+        }
+
+    } */
+
+
+
+    /* function chekAuth() {
+        if (user.isAuth) {
+            return navigate("/main");
+        }
+    } */
 
 
     function checkUser(prev, props) {
@@ -35,27 +60,31 @@ export default function LogIn() {
         return newState
     }
 
-    const SuccessBlock = () => {
+    /* const SuccessBlock = () => {
+        localStorage.setItem('isAuth', user.isAuth);
+        localStorage.setItem('role', user.role);
+
         return navigate("/main");
-    }
-
-
+    } */
 
 
     return (<div>
-        {!user.isAuth ?
+        {
             <div className='logIn'>
                 Авторизация
                 <input type='email' placeholder='User Name' id='email' value={userName} onChange={(event) => setUserName(event.target.value)} required />
-                <input type='password' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
+                <input type='text' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
                 <button className='inputButtom'
                     onClick={() => {
+                        /* saveLocalStorage() */
                         setUser(checkUser)
+
+                        /* chekAuth() */
                     }} >
                     войти
                 </button>
             </div>
-            : <SuccessBlock />
+
         }
     </div>
     )
