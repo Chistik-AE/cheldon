@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import LogIn from './logIn/LogIn';
 import MySpace from './mySpace/MySpace';
-import data from './mySpace/dataBase.json'
-import { BrowserRouter as Router, Route, Switch, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PrivateRouteMain from './contexts/PrivateRouteMain';
 import PrivateRouteLogIn from './contexts/PrivateRouteLogIn';
 
