@@ -75,12 +75,7 @@ export default function LogIn() {
                 <input type='email' placeholder='User Name' id='email' value={userName} onChange={(event) => setUserName(event.target.value)} required />
                 <input type='text' placeholder='Password' id='password' value={userPassword} onChange={(event) => setUserPassword(event.target.value)} required />
                 <button className='inputButtom'
-                    onClick={() => {
-                        /* saveLocalStorage() */
-                        setUser(checkUser)
-
-                        /* chekAuth() */
-                    }} >
+                    onClick={() => {setUser(checkUser)}} >
                     войти
                 </button>
             </div>
