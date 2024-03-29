@@ -13,17 +13,10 @@ export default function MySpace() {
     let tableRows = Object.values(dataBase);
     const [search, setSearch] = useState('');
 
-
-
-
-
     function logOut() {
         localStorage.clear();
         navigate("/logIn");
     }
-
-
-
 
     function tableSearch() {
         if (search === '') {
@@ -32,7 +25,7 @@ export default function MySpace() {
             setDataBase('')
             for (let i = 0; i < Object.keys(notSearch).length; i++) {
                 for (let j = 0; j < Object.values(notSearch[0]).length; j++) {
-                    if (search/* .toUpperCase() */ == Object(Object.values(notSearch[i])[j])/* .toUpperCase() */) {
+                    if (search.toUpperCase() == Object(Object.values(notSearch[i])[j]).toString().toUpperCase()) {
                         tableSearchResult = tableSearchResult.concat([(Object.values(notSearch[i]))])
                     }
                 }
