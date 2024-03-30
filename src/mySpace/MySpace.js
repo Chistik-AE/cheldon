@@ -5,28 +5,52 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function MySpace() {
-    let notSearch = data;
+    const _ = require('lodash');
     let tableSearchResult = [];
     const [dataBase, setDataBase] = useState(data);
     let navigate = useNavigate();
-    let tableHead = Object.keys(notSearch[0]);
+    let tableHead = Object.keys(data[0]);
     let tableRows = Object.values(dataBase);
     const [search, setSearch] = useState('');
+    let tableFilterResult = data;
 
-    function logOut() {
+
+
+    /* console.log(_.orderBy(data, ['max_finish_dttm'], ['desc'])); */
+
+
+    function sortMaxFinish(t) {
+        tableFilterResult = _.orderBy(data, ['max_finish_dttm'], [t.target.value])
+        setDataBase(tableFilterResult)
+    }
+
+
+
+    function filterTypeFlow(h) {         //функция фильтра по type_flow
+        if (h.target.value === 'default') {
+            setDataBase(data)
+        } else {
+            tableFilterResult = _.filter(data, function (qwe) {     //Фильтр!!!!
+                return qwe.type_flow === h.target.value;
+            })
+        }
+        setDataBase(tableFilterResult)
+    }
+
+    function logOut() {  //выход со страницы и разлогинивание
         localStorage.clear();
         navigate("/logIn");
     }
 
-    function tableSearch() {
+    function tableSearch() {  //функция поиска
         if (search === '') {
-            setDataBase(notSearch)
+            setDataBase(data)
         } else {
             setDataBase('')
-            for (let i = 0; i < Object.keys(notSearch).length; i++) {
-                for (let j = 0; j < Object.values(notSearch[0]).length; j++) {
-                    if (search.toUpperCase() == Object(Object.values(notSearch[i])[j]).toString().toUpperCase()) {
-                        tableSearchResult = tableSearchResult.concat([(Object.values(notSearch[i]))])
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                for (let j = 0; j < Object.values(data[0]).length; j++) {
+                    if (search.toUpperCase() === Object(Object.values(data[i])[j]).toString().toUpperCase()) {
+                        tableSearchResult = tableSearchResult.concat([(Object.values(data[i]))])
                     }
                 }
             }
@@ -34,8 +58,6 @@ export default function MySpace() {
         }
 
     }
-
-
 
     return (
         <div className='mySpace' >
@@ -51,16 +73,31 @@ export default function MySpace() {
                         Таблица на моей странице
                     </h1>
                 </div>
-                <div>
-                    <input className='searchForm' type='text' placeholder='Введите запрос' value={search} onChange={(event) => setSearch(event.target.value)} required id="search-text" />
-                    <button onClick={() => tableSearch()}>Применить</button>
+                <div className='options'>
+                    <div >
+                        <input className='searchForm' type='text' placeholder='Введите запрос' value={search} onChange={(event) => setSearch(event.target.value)} required id="search-text" />
+                        <button onClick={() => tableSearch()}>Применить</button>
+                    </div>
+                    <div>
+                        <select onChange={sortMaxFinish}>
+                            <option value="desc">По убыванию</option>
+                            <option value="asc">По возростанию</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select onChange={filterTypeFlow}>
+                            <option value="default">По умолчанию</option>
+                            <option value="RDV">RDV</option>
+                            <option value="IDL">IDL</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
-                    <table>
+                    <table id="table">
                         <thead>
                             {tableHead.map((newHead, index) => { return <th key={index}>{newHead}</th> })}
                         </thead>
-                        <tbody id="table">
+                        <tbody>
                             {tableRows.map((newRow, index) => { return <tr key={index}> {Object.values(newRow).map((cell, index) => { return <td key={index}>{cell}</td> })}</tr> })}
                         </tbody>
                     </table>
