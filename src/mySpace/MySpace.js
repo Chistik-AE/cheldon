@@ -12,51 +12,40 @@ export default function MySpace() {
     let tableHead = Object.keys(data[0]);
     let tableRows = Object.values(dataBase);
     const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState();
     let tableFilterResult = data;
-
-
-
-    /* console.log(_.orderBy(data, ['max_finish_dttm'], ['desc'])); */
-
-
-    function sortMaxFinish(t) {
-        tableFilterResult = _.orderBy(data, ['max_finish_dttm'], [t.target.value])
-        setDataBase(tableFilterResult)
-    }
-
-
-
-    function filterTypeFlow(h) {         //функция фильтра по type_flow
-        if (h.target.value === 'default') {
-            setDataBase(data)
-        } else {
-            tableFilterResult = _.filter(data, function (qwe) {     //Фильтр!!!!
-                return qwe.type_flow === h.target.value;
-            })
-        }
-        setDataBase(tableFilterResult)
-    }
 
     function logOut() {  //выход со страницы и разлогинивание
         localStorage.clear();
         navigate("/logIn");
     }
 
-    function tableSearch() {  //функция поиска
-        if (search === '') {
-            setDataBase(data)
+    function sortMaxFinish(t) {   //функция сортировки
+        tableFilterResult = _.orderBy(data, ['max_finish_dttm'], [t.target.value])
+        setDataBase(tableFilterResult)
+    }
+
+    function searchAnd() {   //функция фильтра и поиска
+        if (filter === 'default') {       //фильтр
+            tableFilterResult = data
         } else {
-            setDataBase('')
-            for (let i = 0; i < Object.keys(data).length; i++) {
-                for (let j = 0; j < Object.values(data[0]).length; j++) {
-                    if (search.toUpperCase() === Object(Object.values(data[i])[j]).toString().toUpperCase()) {
-                        tableSearchResult = tableSearchResult.concat([(Object.values(data[i]))])
+            tableFilterResult = _.filter(data, function (qwe) {
+                return qwe.type_flow === filter;
+            })
+        }
+        setDataBase(tableFilterResult)
+        if (search === '') {      //поиск
+            tableSearchResult = tableFilterResult
+        } else {
+            for (let i = 0; i < Object.keys(tableFilterResult).length; i++) {
+                for (let j = 0; j < Object.values(tableFilterResult[0]).length; j++) {
+                    if (search.toUpperCase() === Object(Object.values(tableFilterResult[i])[j]).toString().toUpperCase()) {
+                        tableSearchResult = tableSearchResult.concat([(Object.values(tableFilterResult[i]))])
                     }
                 }
             }
-            setDataBase(tableSearchResult);
         }
-
+        setDataBase(tableSearchResult)
     }
 
     return (
@@ -76,20 +65,21 @@ export default function MySpace() {
                 <div className='options'>
                     <div >
                         <input className='searchForm' type='text' placeholder='Введите запрос' value={search} onChange={(event) => setSearch(event.target.value)} required id="search-text" />
-                        <button onClick={() => tableSearch()}>Применить</button>
+                        <button onClick={() => searchAnd()}>Применить</button>
                     </div>
                     <div>
-                        <select onChange={sortMaxFinish}>
+                        <select name="select" defaultValue="desc" onChange={sortMaxFinish}>
                             <option value="desc">По убыванию</option>
                             <option value="asc">По возростанию</option>
                         </select>
                     </div>
                     <div>
-                        <select onChange={filterTypeFlow}>
+                        <select value={filter} onChange={(event) => setFilter(event.target.value)}>
                             <option value="default">По умолчанию</option>
                             <option value="RDV">RDV</option>
                             <option value="IDL">IDL</option>
                         </select>
+                        <button onClick={() => searchAnd()}>Применить</button>
                     </div>
                 </div>
                 <div>
