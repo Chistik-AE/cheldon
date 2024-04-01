@@ -7,33 +7,42 @@ import { useNavigate } from 'react-router-dom';
 export default function MySpace() {
     const _ = require('lodash');
     let tableSearchResult = [];
-    const [dataBase, setDataBase] = useState(data);
+    let tableSort = _.orderBy(data, ['max_finish_dttm'], ['desc'])
+    const [dataBase, setDataBase] = useState(tableSort);
     let navigate = useNavigate();
     let tableHead = Object.keys(data[0]);
     let tableRows = Object.values(dataBase);
     const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState();
-    let tableFilterResult = data;
+    const [filter, setFilter] = useState('default');
+    let tableFilterResult = tableSort;
+    const [checked, setChecked] = useState(false);
+
+
+
 
     function logOut() {  //выход со страницы и разлогинивание
         localStorage.clear();
         navigate("/logIn");
     }
 
-    function sortMaxFinish(t) {   //функция сортировки
-        tableFilterResult = _.orderBy(data, ['max_finish_dttm'], [t.target.value])
-        setDataBase(tableFilterResult)
+
+
+    function sortMaxFinish(t) {   //функция сортировки 
+        tableSort = _.orderBy(data, ['max_finish_dttm'], [t.target.value])
+        setDataBase(tableSort)
+        tableFilterResult = tableSort
+        searchAnd()
     }
 
     function searchAnd() {   //функция фильтра и поиска
         if (filter === 'default') {       //фильтр
-            tableFilterResult = data
+            tableFilterResult = tableSort
         } else {
-            tableFilterResult = _.filter(data, function (qwe) {
+            tableFilterResult = _.filter(tableSort, function (qwe) {
                 return qwe.type_flow === filter;
             })
         }
-        setDataBase(tableFilterResult)
+        setDataBase()
         if (search === '') {      //поиск
             tableSearchResult = tableFilterResult
         } else {
@@ -46,7 +55,20 @@ export default function MySpace() {
             }
         }
         setDataBase(tableSearchResult)
+        /* console.log(dataBase[1]) */
     }
+
+
+    function onChange(indexRow, newRow, cell) {    //функция на checkbox 
+        setChecked(!cell.target.value)
+        console.log(indexRow)
+        console.log(Object.values(dataBase[indexRow]))  //вся строка
+        newRow.isChecked = !newRow.isChecked   //изменение ячейки, теперь изменить ячейки в остальных столбцах, и перерисовать таблицу
+        console.log(Object.values(dataBase[indexRow]))
+
+    }
+
+
 
     return (
         <div className='mySpace' >
@@ -64,7 +86,7 @@ export default function MySpace() {
                 </div>
                 <div className='options'>
                     <div >
-                        <input className='searchForm' type='text' placeholder='Введите запрос' value={search} onChange={(event) => setSearch(event.target.value)} required id="search-text" />
+                        <input className='searchForm' type='text' placeholder='Введите запрос' value={search} onChange={(event) => setSearch(event.target.value)} />
                         <button onClick={() => searchAnd()}>Применить</button>
                     </div>
                     <div>
@@ -84,20 +106,30 @@ export default function MySpace() {
                 </div>
                 <div>
                     <table id="table">
-                        <thead>
+                        <thead disabled>
                             {tableHead.map((newHead, index) => { return <th key={index}>{newHead}</th> })}
                         </thead>
                         <tbody>
-                            {tableRows.map((newRow, index) => { return <tr key={index}> {Object.values(newRow).map((cell, index) => { return <td key={index}>{cell}</td> })}</tr> })}
+                            {tableRows.map((newRow, indexRow) => {
+                                return <tr key={indexRow}> {Object.values(newRow).map((cell, index) => {
+                                    if (index === 7) {
+                                        return <td key={index}> <input checked={cell} type='checkbox' onChange={(cell) => onChange(indexRow, newRow, cell)} ></input> </td>
+                                    } else {
+                                        return <td key={index}>{cell}</td>
+                                    }
+                                }
+                                )} </tr>
+                            })}
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <button disabled={!checked}>
+                        Редкатировать
+                    </button>
                 </div>
             </div>
         </div >
     )
-
-
 }
-
-
 
