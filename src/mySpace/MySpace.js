@@ -65,7 +65,6 @@ export default function MySpace() {
         console.log(Object.values(dataBase[indexRow]))  //вся строка
         newRow.isChecked = !newRow.isChecked   //изменение ячейки, теперь изменить ячейки в остальных столбцах, и перерисовать таблицу
         console.log(Object.values(dataBase[indexRow]))
-
     }
 
 

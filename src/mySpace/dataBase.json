@@ -7,7 +7,7 @@
         "count_records": 10,
         "run_last_state": "success",
         "type_flow": "RDV",
-        "isChecked": true
+        "isChecked": false
     },
     {
         "rdv_src_cd": "RKK",
